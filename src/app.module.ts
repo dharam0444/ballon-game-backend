@@ -13,11 +13,9 @@ import { Player } from './players/entities/player.entity';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false, // Railway requires SSL for external connections
-      },
-      synchronize: true, // Only for dev
+      url: process.env.DATABASE_URL + '?sslmode=require',
+      ssl: { rejectUnauthorized: false },
+      synchronize: process.env.NODE_ENV !== 'production',
       autoLoadEntities: true,
       entities: [Player],
     }),
