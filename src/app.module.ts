@@ -13,22 +13,13 @@ import { Player } from './players/entities/player.entity';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_HOST,
-      port: Number(process.env.DATABASE_PORT),
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       entities: [Player],
-      synchronize: true, // keep true only for dev, false in production
-      ssl: {
-        rejectUnauthorized: false,
-      },
-      extra: {
-        // Disable channel binding for Neon compatibility
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      },
+      synchronize: true, 
     }),
     PlayersModule,
   ],

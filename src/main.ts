@@ -17,7 +17,7 @@ async function bootstrap() {
   // Enable validation globally
   app.useGlobalPipes(new ValidationPipe());
   
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3000;
   await app.listen(port, '0.0.0.0');
   console.log(`🚀 NestJS Backend running on http://0.0.0.0:${port}`);
 }
