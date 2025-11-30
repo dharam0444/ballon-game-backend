@@ -12,10 +12,15 @@ import { Player } from './players/entities/player.entity';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: '../game.db', // Use the existing SQLite database
+      type: process.env.DB_TYPE as 'postgres',
+      host: process.env.DATABASE_HOST,
+      port: Number(process.env.DATABASE_PORT),
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [Player],
-      synchronize: true, // Auto-create tables (disable in production)
+      synchronize: true, // keep true only for dev, false in production
+      ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
     }),
     PlayersModule,
   ],
